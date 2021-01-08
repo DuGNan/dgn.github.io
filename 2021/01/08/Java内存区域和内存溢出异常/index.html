@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 杜广楠的博客">
+    <meta name="keywords" content="Java内存区域和内存溢出异常, 杜广楠的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 杜广楠的博客</title>
+    <title>Java内存区域和内存溢出异常 | 杜广楠的博客</title>
     <link rel="icon" type="image/png" href="/dgn.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/dgn.github.io/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/dgn.github.io/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/dgn.github.io/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Java内存区域和内存溢出异常</h1>
                 </div>
             </div>
         </div>
@@ -429,9 +429,17 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/dgn.github.io/tags/JAVA/">
+                                <span class="chip bg-color">JAVA</span>
+                            </a>
+                        
+                            <a href="/dgn.github.io/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -464,15 +472,45 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h2 id="Java内存区域和内存溢出异常"><a href="#Java内存区域和内存溢出异常" class="headerlink" title="Java内存区域和内存溢出异常"></a>Java内存区域和内存溢出异常</h2><h3 id="Java虚拟机会在Java程序运行的时候，将它管理的内存划分为几个区域"><a href="#Java虚拟机会在Java程序运行的时候，将它管理的内存划分为几个区域" class="headerlink" title="Java虚拟机会在Java程序运行的时候，将它管理的内存划分为几个区域"></a>Java虚拟机会在Java程序运行的时候，将它管理的内存划分为几个区域</h3><p>![Java虚拟机运行时数据区](D:\study\my notes\Java虚拟机运行时数据区.png)</p>
+<ol>
+<li><p>程序计数器<br>&emsp;程序计数器占据较小的内存区域，它可以看作当前线程所执行的字节码的行号指示器。为了保证CPU执行权从A线程跳转到B线程后，返回A时，A线程能够继续执行之前的代码，所以A,B两个线程都具有自己的程序计数器，所以程序计数器具有线程隔离性。<br>&emsp;同时，我们把这类内存区域称为“线程私有”的内存<br>&emsp;如果线程执行一个Java方法，程序计数器中存放的就是正在执行的虚拟机字节码指令的地址<br>&emsp;如果线程执行一个本地方法，程序计数器中为空<br>&emsp;继续计数器是《Java虚拟机规范》中唯一没有规定任何OutOfMemoryError情况的区域</p>
+</li>
+<li><p>方法区<br>&emsp;该区域线程共享，存储已经被虚拟机加载的类型信息，常量，静态变量，即时编译器编译后的代码缓存等数据。</p>
+<p> 2.1.运行时常量池<br> &emsp;该部分是方法区的一部分。Class文件中除了有类的版本，字段，方法，接口等描述信息外，还有一项信息是常量池表，用于存放编译期生成的各种字面量与符号引用。<br> &emsp;运行时常量池具备动态性，就是运行期间也可以将新得常量放入池中，例如String的intern()。<br> &emsp;当常量池无法申请到内存时会抛出OutOfMemoryError</p>
+</li>
+<li><p>虚拟机栈<br> &emsp;该部分是线程私有的。虚拟机栈描述的是Java方法执行的线程内存模型。<br> &emsp;每一个方法被执行的时候，Java虚拟机会创建一个栈帧用户存储局部变量表，操作数帧，动态链接，方法出口等信息。每一个方法从调用到执行完毕，对印着一个栈帧在虚拟机栈中入栈到出栈的过程。<br> &emsp;局部变量表中存放了编译期可知的各种Java虚拟机基本数据类型（boolean、byte…），对象引用（reference类型）和returnAddress类型（指向一条字节码指令的地址）<br> 这个区域存在两类异常情况：如果线程请求到的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常，如果Java虚拟机栈容量可以动态扩展，当栈扩展时无法申请到足够的内存会抛出OutOfMemoryError</p>
+</li>
+<li><p>本地方法栈<br> &emsp;与虚拟机栈作用相似，区别在于虚拟机栈执行Java方法服务，而本地方法栈则是虚拟机使用到的本地方法服务</p>
+</li>
+<li><p>堆<br> &emsp;Java堆是被线程共享的一块内存，在虚拟机启动时创建，唯一目的就是存放对象实例。“几乎”所有的对象实例在这里分配内存。<br> &emsp;新生代，老年代，eden空间登名词，仅仅是一部分垃圾收集器的共同特性或者说是设计风格。<br> &emsp;Java堆可以处于物理上不连续的内存空间中，但在逻辑上是连续的。<br> &emsp;Java堆可以是固定的，也可以是扩展的。（通过参数-Xmx或者-Xms设定）。</p>
+</li>
+</ol>
+<p>6.直接内存<br>    &emsp;这部分不属于运行时内存区域，但是会被频繁使用，会出现OutOfMemoryError异常。</p>
+<h3 id="HotSpot虚拟机"><a href="#HotSpot虚拟机" class="headerlink" title="HotSpot虚拟机"></a>HotSpot虚拟机</h3><p>介绍下HotSpot虚拟机在Java堆中对象的分配，布局和访问</p>
+<ol>
+<li><p>对象的创建<br> &emsp;虚拟机遇到new指令时，会去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载，解析和初始化过，如果没有，则必须先执行相应的类加载。<br> &emsp;类加载检查过后，虚拟机会为新对象分配内存，有两种情况。如果Java堆的内存时规整的，即已分配的内存在一边，未分配的内存在另一边，中间放着一个指针所谓分界点的指示器。所谓分配内存仅需要让指针朝未分配内存那边移动和需要分配给新对象所需内存大小的距离。这种分配方式被称为“指针碰撞”。如果Java堆种已分配内存和未分配内存是不规整的，那么虚拟机需要维护一张表,记录着未分配内存，在分配内存时找到一块足够的内存分配给对象。这种分配方式被称为“空闲列表”。Java堆是否规整取决于垃圾收集器是否带有空间压缩整理的能力。<br> &emsp;对象分配修改指针位置，而这个操作又是十分频繁的，在线程并发的情况发可能会线程不安全。两个对象同时需要分配内存，在給A分配内存时还未修改指针，这时B也修改这个指针来分配内存。解决这种问题有两种方法。一是对分配内存的动作进行同步处理，虚拟机采用的CAS配上失败重试保证了更新操作的原子性。二是把内存分配的动作按照线程划分在不同的空间进行，即每个线程在Java堆种预先分配一小块内存，称为本地线程分配缓冲（TLAB）。虚拟机是否使用TLAB，通过-XX:+/UseTLAB设定。<br>&emsp;对象内存分配好后，虚拟机为分配到的空间（不包括对象头）赋值为初值，然后对对象进行必要的设置，例如这个对象是哪个类的实例，如果才能找到类的元数据信息，对象的哈希码。</p>
+</li>
+<li><p>对象的内存布局<br> &emsp;对象在内存种的存储布局可以划分为三个部分：对象头，实例数据和对齐填充</p>
+<p> &emsp;2.1:  对象头包括两类信息，一类是用于存储对象自身运行时的数据，例如hash码，GC分代年龄，锁状态标志，线程持有的锁，偏向线程ID，偏向时间戳等。另一类数据是类型指针，即对象指向它的类型元数据的指针。Java虚拟机通过这个指针来确定对象是哪个类的实例。但并不是所有的虚拟机实现都必须在对象数据上保留类型指针。若对象是一个Java数组，那在对象头中还必须有一块用于记录数组长度的数据。</p>
+<p> &emsp;2.2:  实例数据是对象真正存储的有效信息，即我们在程序代码里面所定义的各种类型的字段内容。<br> &emsp;2.3  对齐填充，不是必然的。起着占位符的作用，应为HotSpot虚拟机的自动内存管理系统要求对象起始地址必须是8字节的整数倍。</p>
+</li>
+<li><p>对象的访问定位<br> &emsp;Java程序通过栈上的reference数据来操作堆上的具体对象。对象的访问方式是由虚拟机实现而定的。主流的两种方式主要为使用句柄和直接指针。<br> &emsp;使用句柄访问时，Java堆中将划分出一块内存作为句柄池。reference中存储的就是对象的句柄地址。<br> &emsp;使用直接指针时，reference存储的就是对象地址。</p>
+</li>
+</ol>
+<p>![](D:\study\my notes\访问对象.png)</p>
+<p> 使用句柄访问最大的好处就是reference中存储稳定的句柄地址，对象被移动时只会改变句柄的实例数据指针，使用直接指针来访问的最大好处就是速度更快</p>
+<h3 id="OutOfMemoryError异常"><a href="#OutOfMemoryError异常" class="headerlink" title="OutOfMemoryError异常"></a>OutOfMemoryError异常</h3><ol>
+<li><p>Java堆溢出<br>通过参数-XX:+HeapDumpOnOutOfMemeroyError可以让虚拟机在出现内存溢出异常的时候Dump出当前的内存堆转储快照以便进行事后分析<br> 处理该异常常规方法是首先通过内存映像分析工具（如Eclipse Memory Analyzer）对Dump出转储快照进行分析，确认是内存泄漏还是内存溢出。<br> 如果是内存泄漏，就需要查看GC Roots的引用链，找到垃圾回收器无法回收对象的原因。<br> 如果是内存溢出，那就是看内存中的对象是否是必须的，检查Java堆虚拟机的堆参数（-Xmx与-Xms）设置，与内存相比，是否存在往上调整的空间。再从代码上检查是否存在某些对象的生命周期过长，持有状态时间过长，存储结构设计不合理等。</p>
+</li>
+<li><p>虚拟机栈和本地方法栈溢出<br>HotSpot虚拟机不支持栈扩展，所以只会再创建线程时申请内存而无法获得足够的内存而出现OutOfMemoryError异常。如果是建立太多的线程导致内存溢出，在不能减少线程数量或者更换64位虚拟机的情况下，就只能通过减少最大堆和减少栈容量来换取更多的线程</p>
+</li>
+<li><p>方法区和运行时常量池溢出<br>在JDK8以后，元空间就代替了永久代，一般就不会出现方法区的溢出异常了。<br>不过HotSpot还是提供了一些参数作为元空间的防御措施<br>–XX:MaxMetaspaceSize：设置元空间最大值，默认是-1，即不限制<br>–XX:MetaspaceSize：指定元空间的初始大小，以字节为单位<br>–XX:MetaspaceFreeRatio：作用是在垃圾收集之后控制最小的元空间剩余容量的百分比，可减少因为元空间不足导致的垃圾收集的频率。</p>
+</li>
+<li><p>本机直接内存溢出</p>
+<p>直接内存的容量大小可通过–XX:MaxDirectMemorySize参数来指定。如果不指定，默认与Java堆最大值一致。<br>由直接内存导致的内存溢出，一个明显的特征是在Heap Dump文件中不会看见有什么异常情况。</p>
+</li>
+</ol>
 
                 
             </div>
@@ -499,7 +537,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dugnan.github.io/dgn.github.io/dgn.github.io/2021/01/08/hello-world/">https://dugnan.github.io/dgn.github.io/dgn.github.io/2021/01/08/hello-world/</a>
+                    <a href="https://dugnan.github.io/dgn.github.io/dgn.github.io/2021/01/08/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/">https://dugnan.github.io/dgn.github.io/dgn.github.io/2021/01/08/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,7 +574,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/dgn.github.io/tags/JAVA/">
+                                    <span class="chip bg-color">JAVA</span>
+                                </a>
+                            
+                                <a href="/dgn.github.io/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -704,29 +750,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/dgn.github.io/2021/01/08/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                <a href="/dgn.github.io/2021/01/08/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/">
                     <div class="card-image">
                         
                         
-                        <img src="/dgn.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="常用的序列化和反序列化">
+                        <img src="/dgn.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="Java内存区域和内存溢出异常">
                         
-                        <span class="card-title">常用的序列化和反序列化</span>
+                        <span class="card-title">Java内存区域和内存溢出异常</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            Java内存区域和内存溢出异常
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -735,11 +782,16 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/dgn.github.io/tags/%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">工具</span>
+                    <a href="/dgn.github.io/tags/JAVA/">
+                        <span class="chip bg-color">JAVA</span>
+                    </a>
+                    
+                    <a href="/dgn.github.io/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
                 </div>
@@ -750,16 +802,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/dgn.github.io/2021/01/08/hello-world/">
+                <a href="/dgn.github.io/2021/01/08/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/dgn.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/dgn.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="常用的序列化和反序列化">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">常用的序列化和反序列化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -780,7 +832,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/dgn.github.io/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
